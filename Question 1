@@ -1,0 +1,56 @@
+a)
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read the CSV file into a DataFrame
+df = pd.read_csv('data.csv')
+print(df)
+
+c)
+# Show basic statistical description
+print(df.describe())
+
+d)
+# Check for null values
+print(df.isnull().sum())
+
+# Replace null values with the mean of the column
+df.fillna(df.mean(), inplace=True)
+
+e)
+# Aggregate data for 'Duration' and 'Calories' columns
+aggregated_data = df[['Duration', 'Pulse']].agg(['min', 'max', 'count', 'mean'])
+print(aggregated_data)
+
+f)
+# Filter rows with calories between 500 and 1000
+filtered_df_1 = df[(df['Calories'] >= 500) & (df['Calories'] <= 1000)]
+print(filtered_df_1)
+
+
+g)
+# Filter rows with calories > 500 and pulse < 100
+filtered_df_2 = df[(df['Calories'] > 500) & (df['Pulse'] < 100)]
+print(filtered_df_2)
+
+h)
+# Create a new DataFrame without 'Maxpulse'
+df_modified = df.drop(columns=['Maxpulse'])
+print(df_modified)
+
+i)
+# Delete 'Maxpulse' from the main DataFrame
+df.drop(columns=['Maxpulse'], inplace=True)
+print(df)
+
+j)
+# Convert 'Calories' column to int datatype
+df['Calories'] = df['Calories'].astype(int)
+print(df.dtypes)
+
+k)
+# Scatter plot for 'Duration' and 'Calories'
+df.plot.scatter(x='Duration', y='Calories', title='Duration vs Calories Scatter Plot')
+plt.show()
+
